@@ -2,25 +2,23 @@ package br.com.dio.desafio.dominio;
 
 import br.com.dio.desafio.dominio.exception.NumeroNegativoException;
 
-public class Curso {
+public class Curso extends Conteudo {
 
-    private String titulo;
-    private String descricao;
     private Integer cargaHoraria;
 
     public Curso(){};
 
-    public Curso(String titulo, String descricao, Integer cargaHoraria){
-        this.titulo = titulo;
-        this.descricao = descricao;
-        setCargaHoraria(cargaHoraria);
+
+    @Override
+    public double calcularXp() {
+        return XP_PADRAO + 40d;
     }
 
-    public String getTitulo() { return titulo; }
-    public void setTitulo(String titulo) { this.titulo = titulo; }
-
-    public String getDescricao() { return descricao; }
-    public void setDescricao(String descricao) { this.descricao = descricao; }
+    public Curso(String titulo, String descricao, Integer cargaHoraria){
+        this.setTitulo(titulo);
+        this.setDescricao(descricao);
+        setCargaHoraria(cargaHoraria);
+    }
 
     public Integer getCargaHoraria() { return cargaHoraria; }
     public void setCargaHoraria(Integer cargaHoraria) {
