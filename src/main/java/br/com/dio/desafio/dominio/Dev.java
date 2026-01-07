@@ -24,6 +24,10 @@ public class Dev {
             conteudosInscritos.remove(conteudo.get());
             xpTotal += conteudo.get().calcularXp();
         }
+
+        if (conteudosInscritos.isEmpty()){
+            System.out.println(nome + "concluiu o Bootcamp!\n");
+        }
     }
 
     public double calcularXp(){
