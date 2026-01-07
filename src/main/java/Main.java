@@ -7,7 +7,6 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-
         Curso introJava = new Curso();
         introJava.setTitulo("Introdução ao Java");
         introJava.setDescricao("Introdução a sintaxe e lógica com Java");
@@ -40,6 +39,8 @@ public class Main {
         Dev fulano = new Dev();
         fulano.setNome("Fulano");
         fulano.inscreverBootcamp(bootcampAccenture);
-        fulano.proguedir(bootcampAccenture);
+        fulano.progredir();
+
+        bootcampAccenture.getRank().exibirRanking();
     }
 }

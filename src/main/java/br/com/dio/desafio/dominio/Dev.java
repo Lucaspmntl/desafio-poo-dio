@@ -7,19 +7,22 @@ import java.util.Set;
 
 public class Dev {
     private String nome;
+    private double xpTotal;
     private Set<Conteudo> conteudosInscritos = new HashSet<>();
     private Set<Conteudo> conteudosConcluidos = new HashSet<>();
 
     public void inscreverBootcamp(Bootcamp bootcamp){
         this.conteudosInscritos.addAll(bootcamp.getConteudos());
-        bootcamp.getDevs().add(this);
+        bootcamp.incluirDev(this);
+        bootcamp.getRank().incluirDev(this);
     }
 
-    public void proguedir(Bootcamp bootcamp){
+    public void progredir() {
         Optional<Conteudo> conteudo = conteudosInscritos.stream().findFirst();
         if (conteudo.isPresent()){
             conteudosConcluidos.add(conteudo.get());
             conteudosInscritos.remove(conteudo.get());
+            xpTotal += conteudo.get().calcularXp();
         }
     }
 
@@ -30,10 +33,8 @@ public class Dev {
                 .sum();
     }
 
-
-    public void progredir(){}
-
-    public void calcularTotalXp(){}
+    public double getXpTotal() {return xpTotal;}
+    public void setXpTotal(double xpTotal) {this.xpTotal = xpTotal;}
 
     public String getNome() {return nome;}
     public void setNome(String nome) {this.nome = nome;}
@@ -52,15 +53,24 @@ public class Dev {
         this.conteudosConcluidos = conteudosConcluidos;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Dev dev = (Dev) o;
-        return Objects.equals(nome, dev.nome) && Objects.equals(conteudosInscritos, dev.conteudosInscritos) && Objects.equals(conteudosConcluidos, dev.conteudosConcluidos);
+        return Objects.equals(nome, dev.nome);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, conteudosInscritos, conteudosConcluidos);
+        return Objects.hash(nome);
+    }
+
+    @Override
+    public String toString() {
+        return "Dev{" +
+                "xpTotal=" + xpTotal +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 }
